@@ -3,6 +3,8 @@ import type { AppProps } from "next/app";
 
 import LayoutComponent from "@/components/layout/layout";
 
+import "@/styles/global.css";
+
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
