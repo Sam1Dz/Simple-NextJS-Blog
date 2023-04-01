@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import {
   AppBar,
   Box,
@@ -7,21 +9,28 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
+// import MenuIcon from "@mui/icons-material/Menu";
+
+import styles from "@/styles/app-bar.module.css";
 
 function AppBarLayoutComponent() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
-        <nav>
+        <nav className={styles.navigation}>
           <Container fixed>
             <Toolbar>
               <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                NEXTJS BLOG
+                <Link href="/">NEXTJS BLOG</Link>
               </Typography>
 
-              <Button color="inherit">Posts</Button>
-              <Button color="inherit">Contact</Button>
+              <Link href="/posts">
+                <Button color="inherit">Posts</Button>
+              </Link>
+
+              <Link href="/contact">
+                <Button color="inherit">Contact</Button>
+              </Link>
             </Toolbar>
           </Container>
         </nav>
