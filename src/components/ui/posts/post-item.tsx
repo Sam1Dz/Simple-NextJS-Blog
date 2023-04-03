@@ -10,13 +10,15 @@ import {
 import styles from "@/styles/post-item.module.css";
 
 import { Post } from "@/types";
+import { convertDateToReadableDate } from "@/helpers/date-conversion";
 
 interface PostItemGridComponentUiProps {
   posts: Post;
 }
 
 function PostItemGridComponentUi(props: PostItemGridComponentUiProps) {
-  const { slug, title, image, excerpt } = props.posts;
+  const { slug, title, image, excerpt, date } = props.posts;
+  const formattedDate = convertDateToReadableDate(date);
 
   return (
     <Card sx={{ display: "flex" }}>
@@ -38,7 +40,7 @@ function PostItemGridComponentUi(props: PostItemGridComponentUiProps) {
             component="time"
             color="text.secondary"
           >
-            March 12, 2023
+            {formattedDate}
           </Typography>
           <Typography paragraph>{excerpt}</Typography>
         </CardContent>
