@@ -1,6 +1,10 @@
 import React from "react";
 import Head from "next/head";
 
+import AllPostsComponent from "@/components/page/posts/all-posts";
+
+import DUMMY_DATA from "@/assets/data/dummy-data.json";
+
 function AllPostsPage() {
   return (
     <React.Fragment>
@@ -12,7 +16,7 @@ function AllPostsPage() {
         />
       </Head>
 
-      <h1>All Posts Page</h1>
+      <AllPostsComponent data={DUMMY_DATA} />
     </React.Fragment>
   );
 }

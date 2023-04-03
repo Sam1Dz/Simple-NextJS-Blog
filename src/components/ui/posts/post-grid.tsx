@@ -18,7 +18,7 @@ function PostGridComponentUi(props: PostGridComponentUiProps) {
       justifyContent="center"
       alignItems="stretch"
       spacing={2}
-      sx={{ p: "1rem 2rem 1rem 2rem" }}
+      sx={{ mt: 4 }}
     >
       {posts?.map((el) => (
         <Grid
