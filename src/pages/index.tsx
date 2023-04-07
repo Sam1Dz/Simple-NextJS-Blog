@@ -4,9 +4,16 @@ import Head from "next/head";
 import HeroComponent from "@/components/page/home/hero";
 import FeaturedPostComponent from "@/components/page/home/featured-posts";
 
-import DUMMY_DATA from "@/assets/data/dummy-data.json";
+import { PostData, getFeaturedPosts } from "@/helpers/posts-util";
+import { GetStaticProps } from "next";
 
-function HomePage() {
+interface HomePageProps {
+  posts: PostData[];
+}
+
+function HomePage(props: HomePageProps) {
+  const { posts } = props;
+
   return (
     <React.Fragment>
       <Head>
@@ -18,9 +25,19 @@ function HomePage() {
       </Head>
 
       <HeroComponent />
-      <FeaturedPostComponent data={DUMMY_DATA} />
+      <FeaturedPostComponent data={posts} />
     </React.Fragment>
   );
 }
+
+export const getStaticProps: GetStaticProps = async () => {
+  const featuredPosts = getFeaturedPosts();
+
+  return {
+    props: {
+      posts: featuredPosts,
+    },
+  };
+};
 
 export default HomePage;

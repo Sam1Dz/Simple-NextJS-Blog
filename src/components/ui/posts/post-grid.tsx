@@ -2,10 +2,10 @@ import { Grid } from "@mui/material";
 
 import PostItemGridComponentUi from "./post-item";
 
-import { Post } from "@/types";
+import { PostData } from "@/helpers/posts-util";
 
 interface PostGridComponentUiProps {
-  posts: Post[];
+  posts: PostData[];
 }
 
 function PostGridComponentUi(props: PostGridComponentUiProps) {

@@ -2,10 +2,10 @@ import { Box, Typography } from "@mui/material";
 
 import PostGridComponentUi from "@/components/ui/posts/post-grid";
 
-import { Post } from "@/types";
+import { PostData } from "@/helpers/posts-util";
 
 interface FeaturedPostComponentProps {
-  data: Post[];
+  data: PostData[];
 }
 
 function FeaturedPostComponent(props: FeaturedPostComponentProps) {

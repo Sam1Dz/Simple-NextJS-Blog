@@ -9,11 +9,11 @@ import {
 
 import styles from "@/styles/post-item.module.css";
 
-import { Post } from "@/types";
 import { convertDateToReadableDate } from "@/helpers/date-conversion";
+import { PostData } from "@/helpers/posts-util";
 
 interface PostItemGridComponentUiProps {
-  posts: Post;
+  posts: PostData;
 }
 
 function PostItemGridComponentUi(props: PostItemGridComponentUiProps) {

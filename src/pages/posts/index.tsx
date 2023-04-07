@@ -3,9 +3,16 @@ import Head from "next/head";
 
 import AllPostsComponent from "@/components/page/posts/all-posts";
 
-import DUMMY_DATA from "@/assets/data/dummy-data.json";
+import { PostData, getAllPosts } from "@/helpers/posts-util";
+import { GetStaticProps } from "next";
 
-function AllPostsPage() {
+interface AllPostsPageProps {
+  posts: PostData[];
+}
+
+function AllPostsPage(props: AllPostsPageProps) {
+  const { posts } = props;
+
   return (
     <React.Fragment>
       <Head>
@@ -16,9 +23,19 @@ function AllPostsPage() {
         />
       </Head>
 
-      <AllPostsComponent data={DUMMY_DATA} />
+      <AllPostsComponent data={posts} />
     </React.Fragment>
   );
 }
+
+export const getStaticProps: GetStaticProps = async () => {
+  const allPosts = getAllPosts();
+
+  return {
+    props: {
+      posts: allPosts,
+    },
+  };
+};
 
 export default AllPostsPage;

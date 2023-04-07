@@ -4,6 +4,18 @@ import matter from "gray-matter";
 
 const postsDirectory = path.join(process.cwd(), "src/assets/content/posts");
 
+type Post = {
+  title: string;
+  date: string;
+  image: string;
+  excerpt: string;
+  isFeatured: boolean;
+};
+export type PostData = Post & {
+  slug: string;
+  content: string;
+};
+
 export function getPostsFiles() {
   return fs.readdirSync(postsDirectory);
 }
@@ -15,11 +27,18 @@ export function getPostData(fileName: string) {
   const fileContent = fs.readFileSync(filePath, "utf-8");
 
   const { content, data } = matter(fileContent);
+  const metadata: Post = {
+    title: data.title,
+    date: data.date,
+    image: data.image,
+    excerpt: data.excerpt,
+    isFeatured: data.isFeatured,
+  };
 
   const postData = {
     slug: postSlug,
-    metadata: data,
     content,
+    ...metadata,
   };
 
   return postData;
@@ -33,7 +52,7 @@ export function getAllPosts() {
       return getPostData(e);
     })
     .sort((a, b): any => {
-      a.metadata.date > b.metadata.date ? -1 : 1;
+      a.date > b.date ? -1 : 1;
     });
 
   return allPosts;
@@ -41,7 +60,7 @@ export function getAllPosts() {
 
 export function getFeaturedPosts() {
   const allPosts = getAllPosts();
-  const featuredPosts = allPosts.filter((e) => e.metadata.isFeatured);
+  const featuredPosts = allPosts.filter((e) => e.isFeatured);
 
   return featuredPosts;
 }
