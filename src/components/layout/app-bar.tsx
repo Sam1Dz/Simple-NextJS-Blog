@@ -8,15 +8,12 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-// import MenuIcon from "@mui/icons-material/Menu";
-
-import styles from "@/styles/app-bar.module.css";
 
 function AppBarLayoutComponent() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
-        <nav className={styles.navigation}>
+        <Box component="nav">
           <Container fixed>
             <Toolbar>
               <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
@@ -32,7 +29,7 @@ function AppBarLayoutComponent() {
               </Link>
             </Toolbar>
           </Container>
-        </nav>
+        </Box>
       </AppBar>
     </Box>
   );

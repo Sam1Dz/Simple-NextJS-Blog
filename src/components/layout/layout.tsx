@@ -1,6 +1,6 @@
 import React from "react";
 
-import { CssBaseline } from "@mui/material";
+import { Box, CssBaseline } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import AppBarLayoutComponent from "./app-bar";
@@ -24,7 +24,7 @@ function LayoutComponent(props: LayoutComponentProps) {
         <CssBaseline />
         <AppBarLayoutComponent />
 
-        <main>{children}</main>
+        <Box component="main">{children}</Box>
       </ThemeProvider>
     </React.Fragment>
   );
