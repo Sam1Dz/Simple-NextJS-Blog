@@ -1,5 +1,6 @@
 import React from "react";
 import Head from "next/head";
+import ContactFormComponents from "@/components/page/contact/contact-form";
 
 function ContactPage() {
   return (
@@ -9,7 +10,7 @@ function ContactPage() {
         <meta name="description" content="Send me your messages!" />
       </Head>
 
-      <h1>Contact Page</h1>
+      <ContactFormComponents />
     </React.Fragment>
   );
 }
