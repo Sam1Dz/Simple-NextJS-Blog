@@ -1,10 +1,11 @@
 import Image from "next/image";
-import { Box, useMediaQuery } from "@mui/material";
+import { Avatar, Box, Typography } from "@mui/material";
 
-import HeroContentComponent from "./hero-content";
+import useResponsive from "@/helpers/hooks/responsive-screen-hook";
 
 function HeroComponent() {
-  const heroHeightUnder375 = useMediaQuery("(min-height:300px)");
+  const { isHeightUnder375, isScreenWidthUnder600, isScreenHeightUnder600 } =
+    useResponsive();
 
   return (
     <Box
@@ -12,9 +13,7 @@ function HeroComponent() {
       sx={{
         position: "relative",
         width: "100%",
-        height: heroHeightUnder375
-          ? "calc(100vh - 56px)"
-          : "calc(100vh + 56px)",
+        height: isHeightUnder375 ? "calc(100vh - 56px)" : "calc(100vh + 56px)",
         overflow: "hidden",
       }}
     >
@@ -47,7 +46,54 @@ function HeroComponent() {
           p: 1,
         }}
       >
-        <HeroContentComponent />
+        <Avatar
+          sx={{
+            width: isScreenWidthUnder600 && isScreenHeightUnder600 ? 300 : 150,
+            height: isScreenWidthUnder600 && isScreenHeightUnder600 ? 300 : 150,
+            boxShadow: "0 1px 8px 16px rgba(0, 0, 0, 0.2)",
+            overflow: "hidden",
+            m: "auto",
+            mb: 2,
+          }}
+        >
+          <Image
+            src="/images/site/sam1dz-pp.jpg"
+            alt="Sam1Dz Profile Photo"
+            fill
+          />
+        </Avatar>
+
+        <Typography
+          variant={
+            isScreenWidthUnder600 && isScreenHeightUnder600 ? "h2" : "h4"
+          }
+          component="h1"
+          gutterBottom
+        >
+          Hi, i&apos;m &quot;Sam1Dz&quot;
+        </Typography>
+        <Typography
+          variant={
+            isScreenWidthUnder600 && isScreenHeightUnder600 ? "h5" : "body1"
+          }
+          component="p"
+          gutterBottom
+        >
+          This is just an example of a Web Blog created by NextJS
+        </Typography>
+        <Typography
+          variant="overline"
+          component="p"
+          sx={{
+            lineHeight: "inherit",
+            fontSize: !(isScreenWidthUnder600 && isScreenHeightUnder600)
+              ? "0.5rem"
+              : "0.75rem",
+          }}
+        >
+          &quot;Enhanced version from NextJS course by Maximilian
+          Schwarzmüller&quot;
+        </Typography>
       </Box>
     </Box>
   );
