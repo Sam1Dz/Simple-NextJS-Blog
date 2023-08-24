@@ -1,11 +1,13 @@
 import React from "react";
 import Head from "next/head";
 import { GetStaticPaths, GetStaticProps } from "next";
-import { ParsedUrlQuery } from "querystring";
 
 import PostContentComponent from "@/components/page/posts/post-content";
 
-import { PostData, getPostData, getPostsFiles } from "@/helpers/posts-util";
+import { getPostData, getPostsFiles } from "@/helpers/posts-util";
+
+import type { ParsedUrlQuery } from "querystring";
+import type { PostData } from "@/helpers/posts-util";
 
 interface ContextParams extends ParsedUrlQuery {
   slug: string;

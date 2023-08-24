@@ -1,10 +1,12 @@
 import React from "react";
 import Head from "next/head";
+import { GetStaticProps } from "next";
 
 import AllPostsComponent from "@/components/page/posts/all-posts";
 
-import { PostData, getAllPosts } from "@/helpers/posts-util";
-import { GetStaticProps } from "next";
+import { getAllPosts } from "@/helpers/posts-util";
+
+import type { PostData } from "@/helpers/posts-util";
 
 interface AllPostsPageProps {
   posts: PostData[];

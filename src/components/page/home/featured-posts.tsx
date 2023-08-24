@@ -1,8 +1,10 @@
-import { Box, Typography } from "@mui/material";
+/* MATERIAL UI | COMPONENTS */
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 
 import PostGridComponentUi from "@/components/ui/posts/post-grid";
 
-import { PostData } from "@/helpers/posts-util";
+import type { PostData } from "@/helpers/posts-util";
 
 interface FeaturedPostComponentProps {
   data: PostData[];

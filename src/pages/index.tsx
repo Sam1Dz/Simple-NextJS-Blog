@@ -1,11 +1,13 @@
 import React from "react";
 import Head from "next/head";
+import { GetStaticProps } from "next";
 
 import HeroComponent from "@/components/page/home/hero";
 import FeaturedPostComponent from "@/components/page/home/featured-posts";
 
-import { PostData, getFeaturedPosts } from "@/helpers/posts-util";
-import { GetStaticProps } from "next";
+import { getFeaturedPosts } from "@/helpers/posts-util";
+
+import type { PostData } from "@/helpers/posts-util";
 
 interface HomePageProps {
   posts: PostData[];

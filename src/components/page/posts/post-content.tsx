@@ -1,8 +1,10 @@
-import { Box, Container } from "@mui/material";
+/* MATERIAL UI | COMPONENTS */
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
 
-import PostHeaderComponentUi from "@/components/ui/posts/post-header";
+import PostHeaderComponentUI from "@/components/ui/posts/post-header";
 
-import { PostData } from "@/helpers/posts-util";
+import type { PostData } from "@/helpers/posts-util";
 
 interface PostContentComponentProps {
   post: PostData;
@@ -14,7 +16,7 @@ function PostContentComponent(props: PostContentComponentProps) {
 
   return (
     <Box component="article">
-      <PostHeaderComponentUi title={title} date={date} image={imageUrl} />
+      <PostHeaderComponentUI title={title} date={date} image={imageUrl} />
 
       <Container maxWidth="md">
         <h1>Post Detail Page</h1>

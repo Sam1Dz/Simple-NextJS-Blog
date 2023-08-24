@@ -1,11 +1,19 @@
 import Image from "next/image";
-import { Avatar, Box, Typography } from "@mui/material";
 
-import useResponsive from "@/helpers/hooks/responsive-screen-hook";
+/* MATERIAL UI | COMPONENTS */
+import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
+
+import useResponsive from "@/helpers/hooks/use-responsive";
 
 function HeroComponent() {
-  const { isHeightUnder375, isScreenWidthUnder600, isScreenHeightUnder600 } =
-    useResponsive();
+  const {
+    isScreenHeightUnder375,
+    isScreenHeightUnder600,
+    isScreenWidthUnder600,
+  } = useResponsive();
 
   return (
     <Box
@@ -13,7 +21,9 @@ function HeroComponent() {
       sx={{
         position: "relative",
         width: "100%",
-        height: isHeightUnder375 ? "calc(100vh - 56px)" : "calc(100vh + 56px)",
+        height: isScreenHeightUnder375
+          ? "calc(100vh + 56px)"
+          : "calc(100vh - 56px)",
         overflow: "hidden",
       }}
     >
@@ -43,57 +53,60 @@ function HeroComponent() {
           transform: "translate(-50%, -50%)",
           textAlign: "center",
           width: "100%",
-          p: 1,
         }}
       >
-        <Avatar
-          sx={{
-            width: isScreenWidthUnder600 && isScreenHeightUnder600 ? 300 : 150,
-            height: isScreenWidthUnder600 && isScreenHeightUnder600 ? 300 : 150,
-            boxShadow: "0 1px 8px 16px rgba(0, 0, 0, 0.2)",
-            overflow: "hidden",
-            m: "auto",
-            mb: 2,
-          }}
-        >
-          <Image
-            src="/images/site/sam1dz-pp.jpg"
-            alt="Sam1Dz Profile Photo"
-            fill
-          />
-        </Avatar>
+        <Container maxWidth="md">
+          <Avatar
+            sx={{
+              width:
+                isScreenHeightUnder600 || isScreenWidthUnder600 ? 150 : 300,
+              height:
+                isScreenHeightUnder600 || isScreenWidthUnder600 ? 150 : 300,
+              boxShadow: "0 1px 8px 16px rgba(0, 0, 0, 0.2)",
+              overflow: "hidden",
+              m: "auto",
+              mb: 2,
+            }}
+          >
+            <Image
+              src="/images/site/sam1dz-pp.jpg"
+              alt="Sam1Dz Profile Photo"
+              fill
+            />
+          </Avatar>
 
-        <Typography
-          variant={
-            isScreenWidthUnder600 && isScreenHeightUnder600 ? "h2" : "h4"
-          }
-          component="h1"
-          gutterBottom
-        >
-          Hi, i&apos;m &quot;Sam1Dz&quot;
-        </Typography>
-        <Typography
-          variant={
-            isScreenWidthUnder600 && isScreenHeightUnder600 ? "h5" : "body1"
-          }
-          component="p"
-          gutterBottom
-        >
-          This is just an example of a Web Blog created by NextJS
-        </Typography>
-        <Typography
-          variant="overline"
-          component="p"
-          sx={{
-            lineHeight: "inherit",
-            fontSize: !(isScreenWidthUnder600 && isScreenHeightUnder600)
-              ? "0.5rem"
-              : "0.75rem",
-          }}
-        >
-          &quot;Enhanced version from NextJS course by Maximilian
-          Schwarzmüller&quot;
-        </Typography>
+          <Typography
+            variant={
+              isScreenHeightUnder600 || isScreenWidthUnder600 ? "h4" : "h2"
+            }
+            component="h1"
+            gutterBottom
+          >
+            Hi, i&apos;m &quot;Sam1Dz&quot;
+          </Typography>
+          <Typography
+            variant={
+              isScreenHeightUnder600 || isScreenWidthUnder600 ? "body1" : "h5"
+            }
+            component="p"
+            gutterBottom
+          >
+            This is just an example of a Web Blog created by NextJS
+          </Typography>
+          <Typography
+            variant="overline"
+            component="p"
+            sx={{
+              lineHeight: "inherit",
+              fontSize: !(isScreenHeightUnder600 || isScreenWidthUnder600)
+                ? "0.75rem"
+                : "0.5rem",
+            }}
+          >
+            &quot;Enhanced version from NextJS course by Maximilian
+            Schwarzmüller&quot;
+          </Typography>
+        </Container>
       </Box>
     </Box>
   );

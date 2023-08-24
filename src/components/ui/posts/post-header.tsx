@@ -1,5 +1,9 @@
 import Image from "next/image";
-import { Box, Container, Typography } from "@mui/material";
+
+/* MATERIAL UI | COMPONENTS */
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
 
 import { convertDateToReadableDate } from "@/helpers/date-conversion";
 
@@ -9,7 +13,7 @@ interface PostHeaderComponentUiProps {
   image: string;
 }
 
-function PostHeaderComponentUi(props: PostHeaderComponentUiProps) {
+function PostHeaderComponentUI(props: PostHeaderComponentUiProps) {
   const { title, date, image } = props;
   const formattedDate = convertDateToReadableDate(date);
 
@@ -19,7 +23,7 @@ function PostHeaderComponentUi(props: PostHeaderComponentUiProps) {
       sx={{
         position: "relative",
         width: "100%",
-        height: "300px",
+        height: { md: "300px", xs: "400px" },
         overflow: "hidden",
       }}
     >
@@ -52,15 +56,25 @@ function PostHeaderComponentUi(props: PostHeaderComponentUiProps) {
         }}
       >
         <Container maxWidth="md">
-          <Box component="div" sx={{ display: "flex" }}>
+          <Box
+            component="div"
+            sx={{
+              display: "flex",
+              flexDirection: { md: "row", xs: "column-reverse" },
+              textAlign: { md: "left", xs: "center" },
+              alignItems: "center",
+            }}
+          >
             <Box
               component="div"
-              display="flex"
-              flexWrap="wrap"
-              flexDirection="column"
-              flexGrow={1}
+              sx={{
+                display: "flex",
+                flexWrap: "wrap",
+                flexDirection: "column",
+                flexGrow: 1,
+              }}
             >
-              <Typography variant="h2" component="h1">
+              <Typography variant="h4" component="h1">
                 {title}
               </Typography>
               <Typography
@@ -73,9 +87,12 @@ function PostHeaderComponentUi(props: PostHeaderComponentUiProps) {
             </Box>
             <Box
               component="div"
-              display="flex"
-              flexWrap="wrap"
-              alignContent="space-around"
+              sx={{
+                display: "flex",
+                flexWrap: "wrap",
+                alignContent: "space-around",
+                m: 2,
+              }}
             >
               <Image
                 src={image}
@@ -92,4 +109,4 @@ function PostHeaderComponentUi(props: PostHeaderComponentUiProps) {
   );
 }
 
-export default PostHeaderComponentUi;
+export default PostHeaderComponentUI;

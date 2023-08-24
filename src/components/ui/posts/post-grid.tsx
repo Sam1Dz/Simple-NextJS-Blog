@@ -1,8 +1,9 @@
-import { Grid } from "@mui/material";
+/* MATERIAL UI | COMPONENTS */
+import Grid from "@mui/material/Grid";
 
 import PostItemGridComponentUi from "./post-item";
 
-import { PostData } from "@/helpers/posts-util";
+import type { PostData } from "@/helpers/posts-util";
 
 interface PostGridComponentUiProps {
   posts: PostData[];

@@ -1,7 +1,9 @@
 import React from "react";
-
-import { Box, CssBaseline } from "@mui/material";
+import CssBaseline from "@mui/material/CssBaseline";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+/* MATERIAL UI | COMPONENTS */
+import Box from "@mui/material/Box";
 
 import AppBarLayoutComponent from "./app-bar";
 
