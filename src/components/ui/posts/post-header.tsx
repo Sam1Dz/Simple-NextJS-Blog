@@ -19,7 +19,7 @@ function PostHeaderComponentUI(props: PostHeaderComponentUiProps) {
 
   return (
     <Box
-      component="header"
+      component="section"
       sx={{
         position: "relative",
         width: "100%",

@@ -1,3 +1,4 @@
+import React from "react";
 import Image from "next/image";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -28,14 +29,14 @@ function PostContentComponent(props: PostContentComponentProps) {
   const imageUrl = `/images/posts/${slug}`;
 
   return (
-    <Box component="article">
+    <React.Fragment>
       <PostHeaderComponentUI
         title={title}
         date={date}
         image={`${imageUrl}/${image}`}
       />
 
-      <Container maxWidth="md">
+      <Container component="article" maxWidth="md">
         <ReactMarkdown
           components={{
             img(img) {
@@ -111,7 +112,7 @@ function PostContentComponent(props: PostContentComponentProps) {
           {content}
         </ReactMarkdown>
       </Container>
-    </Box>
+    </React.Fragment>
   );
 }
 
