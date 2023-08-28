@@ -24,6 +24,8 @@ const useResponsive = () => {
   }, [initialRender]);
 
   return {
+    width,
+    height,
     isMobile: width < 900,
     isScreenHeightUnder375: height < 300,
     isScreenHeightUnder600: height < 600,

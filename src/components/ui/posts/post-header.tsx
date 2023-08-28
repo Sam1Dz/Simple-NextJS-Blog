@@ -25,6 +25,7 @@ function PostHeaderComponentUI(props: PostHeaderComponentUiProps) {
         width: "100%",
         height: { md: "300px", xs: "400px" },
         overflow: "hidden",
+        mb: 4,
       }}
     >
       <Box
