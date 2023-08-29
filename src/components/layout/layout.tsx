@@ -26,7 +26,9 @@ function LayoutComponent(props: LayoutComponentProps) {
         <CssBaseline />
         <AppBarLayoutComponent />
 
-        <Box component="main">{children}</Box>
+        <Box component="main" sx={{ pt: { xs: 7, sm: 8 } }}>
+          {children}
+        </Box>
       </ThemeProvider>
     </React.Fragment>
   );
