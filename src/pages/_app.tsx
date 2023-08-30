@@ -1,7 +1,9 @@
 import Head from "next/head";
-import type { AppProps } from "next/app";
+import { SnackbarProvider } from "notistack";
 
 import LayoutComponent from "@/components/layout/layout";
+
+import type { AppProps } from "next/app";
 
 import "@/styles/global.css";
 
@@ -14,13 +16,15 @@ export default function App(props: AppProps) {
   const { Component, pageProps } = props;
 
   return (
-    <LayoutComponent>
-      <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <SnackbarProvider autoHideDuration={3000}>
+      <LayoutComponent>
+        <Head>
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
 
-      <Component {...pageProps} />
-    </LayoutComponent>
+        <Component {...pageProps} />
+      </LayoutComponent>
+    </SnackbarProvider>
   );
 }

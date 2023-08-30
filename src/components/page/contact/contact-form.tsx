@@ -1,12 +1,16 @@
 import React from "react";
+import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
-import { useFormik } from "formik";
 import { visuallyHidden } from "@mui/utils";
+import { useSnackbar } from "notistack";
+
+/* FORMMIK */
+import * as yup from "yup";
+import { useFormik } from "formik";
 
 /* MATERIAL UI | COMPONENTS */
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Divider from "@mui/material/Divider";
 import FormControl from "@mui/material/FormControl";
@@ -14,13 +18,21 @@ import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import SvgIcon from "@mui/material/SvgIcon";
 import TextField from "@mui/material/TextField";
+import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
+
+/* MATERIAL UI : LABS | COMPONENTS */
+import LoadingButton from "@mui/lab/LoadingButton";
 
 /* MATERIAL UI : ICONS */
 import InstagramIcon from "@mui/icons-material/Instagram";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
+import CloseIcon from "@mui/icons-material/Close";
 
 import useResponsive from "@/helpers/hooks/use-responsive";
+
+import type { AxiosError } from "axios";
+import type { VariantType } from "notistack";
 
 function Social() {
   return (
@@ -67,9 +79,42 @@ function Social() {
   );
 }
 
+const validationSchema = yup.object({
+  email: yup
+    .string()
+    .email("Enter a valid email")
+    .required("Email is required"),
+  name: yup.string().required("Name is required"),
+  message: yup.string().required("Message is required"),
+});
+
 function ContactFormComponents() {
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const { isMobile, isScreenHeightUnder600, isScreenWidthUnder600 } =
     useResponsive();
+
+  const notification = (message: string, variant?: VariantType) => {
+    variant = variant ?? "default";
+
+    enqueueSnackbar(message, {
+      variant,
+      action(key) {
+        return (
+          <React.Fragment>
+            <Tooltip title="Close">
+              <IconButton
+                aria-label="close-snackbar"
+                color="inherit"
+                onClick={() => closeSnackbar(key)}
+              >
+                <CloseIcon />
+              </IconButton>
+            </Tooltip>
+          </React.Fragment>
+        );
+      },
+    });
+  };
 
   const contactForm = useFormik({
     initialValues: {
@@ -77,8 +122,20 @@ function ContactFormComponents() {
       name: "",
       message: "",
     },
-    onSubmit: (v) => {
-      console.log(v);
+    validationSchema,
+    onSubmit: async (payload) => {
+      await axios
+        .post("/api/contact", payload)
+        .then(() => {
+          notification("Message sent successfully!", "success");
+          contactForm.resetForm();
+        })
+        .catch((err) => {
+          notification(
+            err.response?.data.message || "Something went wrong!",
+            "error"
+          );
+        });
     },
   });
 
@@ -161,8 +218,17 @@ function ContactFormComponents() {
                     id="email"
                     name="email"
                     type="email"
-                    label="Your Email"
+                    label="Your Email *"
+                    value={contactForm.values.email}
                     onChange={contactForm.handleChange}
+                    onBlur={contactForm.handleBlur}
+                    error={
+                      contactForm.touched.email &&
+                      Boolean(contactForm.errors.email)
+                    }
+                    helperText={
+                      contactForm.touched.email && contactForm.errors.email
+                    }
                   />
                 </FormControl>
               </Grid>
@@ -172,8 +238,17 @@ function ContactFormComponents() {
                     id="name"
                     name="name"
                     type="text"
-                    label="Your Name"
+                    label="Your Name *"
+                    value={contactForm.values.name}
                     onChange={contactForm.handleChange}
+                    onBlur={contactForm.handleBlur}
+                    error={
+                      contactForm.touched.name &&
+                      Boolean(contactForm.errors.name)
+                    }
+                    helperText={
+                      contactForm.touched.name && contactForm.errors.name
+                    }
                   />
                 </FormControl>
               </Grid>
@@ -182,11 +257,19 @@ function ContactFormComponents() {
                   <TextField
                     id="message"
                     name="message"
-                    label="Your Message"
+                    label="Your Message *"
                     multiline
                     rows={5}
-                    onChange={contactForm.handleChange}
                     value={contactForm.values.message}
+                    onChange={contactForm.handleChange}
+                    onBlur={contactForm.handleBlur}
+                    error={
+                      contactForm.touched.message &&
+                      Boolean(contactForm.errors.message)
+                    }
+                    helperText={
+                      contactForm.touched.message && contactForm.errors.message
+                    }
                   />
                 </FormControl>
               </Grid>
@@ -206,14 +289,15 @@ function ContactFormComponents() {
               >
                 <Social />
               </Box>
-              <Button
+              <LoadingButton
                 size="large"
                 variant="contained"
                 type="submit"
                 fullWidth={isMobile}
+                loading={contactForm.isSubmitting}
               >
                 Send Message
-              </Button>
+              </LoadingButton>
             </Box>
           </form>
         </Box>
